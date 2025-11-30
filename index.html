@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Games Arena</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+
+<body>
+
+    <!-- ============================= -->
+    <!-- LOGIN VIEW -->
+    <!-- ============================= -->
+    <section id="view-login" class="active">
+        <div class="card login-card glass">
+            <h1 class="title">Office Games <span class="accent">Arena</span></h1>
+
+            <img id="login-avatar" class="avatar-large" src="" alt="avatar">
+
+            <input id="inp-username" class="input" type="text" maxlength="12" placeholder="Your Name...">
+
+            <button class="btn neon" onclick="app.randomizeAvatar()">Random Avatar</button>
+
+            <button class="btn primary" onclick="app.auth()">Enter Arena</button>
+        </div>
+    </section>
+
+
+
+    <!-- ============================= -->
+    <!-- LOBBY VIEW -->
+    <!-- ============================= -->
+    <section id="view-lobby" class="hidden">
+        <header class="header glass">
+            <div class="user-info">
+                <img id="lobby-avatar" class="avatar-mini" src="">
+                <span id="lobby-name"></span>
+            </div>
+        </header>
+
+        <div class="lobby-container">
+
+            <!-- LEFT PANEL -->
+            <div class="panel glass">
+                <h2>Game Rooms</h2>
+
+                <button class="btn primary" onclick="app.createRoom()">Create Room</button>
+
+                <div class="join-box">
+                    <input id="inp-room-code" type="text" maxlength="5" placeholder="Room Code">
+                    <button class="btn secondary" onclick="app.joinRoom()">Join</button>
+                </div>
+            </div>
+
+
+            <!-- RIGHT PANEL -->
+            <div class="panel glass">
+                <h2>Leaderboard</h2>
+
+                <ul id="leaderboard-list" class="leaderboard"></ul>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- ============================= -->
+    <!-- ROOM VIEW -->
+    <!-- ============================= -->
+    <section id="view-room" class="hidden">
+
+        <!-- HEADER -->
+        <div class="room-header glass">
+            <button class="btn back" onclick="app.leaveRoom()">← Lobby</button>
+            <h3 id="room-display-code">CODE:</h3>
+        </div>
+
+        <div class="room-container">
+
+            <!-- GAME AREA -->
+            <div class="game-area glass">
+                
+                <!-- Game Selector (Host Only) -->
+                <div id="game-selector">
+                    <h3>Select Game</h3>
+
+                    <div class="game-grid">
+                        <button onclick="game.start('tictactoe')" class="btn game-btn">Tic Tac Toe</button>
+                        <button onclick="game.start('snake')" class="btn game-btn">Snake Battle</button>
+                        <button onclick="game.start('rps')" class="btn game-btn">Rock Paper Scissors</button>
+                        <button onclick="game.start('speed')" class="btn game-btn">Speed Click</button>
+                        <button onclick="game.start('word')" class="btn game-btn">Word Guess</button>
+                        <button onclick="game.start('memory')" class="btn game-btn">Memory Match</button>
+                        <button onclick="game.start('draw')" class="btn game-btn">Drawing Game</button>
+                        <button onclick="game.start('math')" class="btn game-btn">Math Duel</button>
+                        <button onclick="game.start('uno')" class="btn game-btn">UNO Mini</button>
+                        <button onclick="game.start('tap')" class="btn game-btn">Tap Target</button>
+                    </div>
+                </div>
+
+                <!-- Active Game Stage -->
+                <div id="game-stage" class="hidden">
+                    <h2 id="game-title">Game</h2>
+                    <div id="game-canvas"></div>
+
+                    <!-- Host-only Controls -->
+                    <div id="host-controls" class="hidden">
+                        <button class="btn danger" onclick="game.reset()">Reset Game</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- SOCIAL PANEL -->
+            <div class="social-area glass">
+
+                <!-- Players List -->
+                <div class="players-box">
+                    <h3>Players</h3>
+                    <ul id="room-players"></ul>
+                </div>
+
+                <!-- CHAT -->
+                <div class="chat-box">
+                    <div id="chat-box" class="chat-messages"></div>
+
+                    <div class="chat-input">
+                        <input id="inp-chat" type="text" placeholder="Message...">
+                        <button class="btn neon" onclick="app.sendChat()">Send</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

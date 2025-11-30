@@ -1,0 +1,391 @@
+/* ========================= */
+/*  GLOBAL / ROOT VARIABLES  */
+/* ========================= */
+:root {
+    --bg: #0a0f1f;
+    --glass: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.15);
+    --text: #e4e8ff;
+    --accent: #6a5cff;
+    --accent-glow: #6a5cff99;
+    --danger: #ff4e4e;
+    --neon: #00ffe7;
+    --success: #10ff8a;
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+}
+
+/* Hide views by default */
+.hidden { display: none !important; }
+
+/* Activate smooth fade */
+section {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0; left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity .3s ease, transform .3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+section.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* ========================= */
+/*  GLASS STYLE ELEMENTS     */
+/* ========================= */
+.glass {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+}
+
+/* ========================= */
+/*         BUTTONS           */
+/* ========================= */
+.btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+    border: none;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.btn.secondary {
+    background: #26335c;
+    color: white;
+}
+
+.btn.neon {
+    background: var(--neon);
+    color: black;
+    box-shadow: 0 0 15px var(--neon);
+}
+
+.btn.danger {
+    background: var(--danger);
+    color: white;
+}
+
+/* Back Button */
+.btn.back {
+    background: #374151;
+    color: white;
+}
+
+/* Game buttons */
+.btn.game-btn {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    margin: 5px 0;
+    background: #1c2748;
+    color: #ffffff;
+    border: 1px solid var(--border);
+}
+
+/* ========================= */
+/*        INPUTS             */
+/* ========================= */
+.input {
+    width: 80%;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+/* Chat input */
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: white;
+}
+
+/* ========================= */
+/*       TITLES / TEXT       */
+/* ========================= */
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+.accent { color: var(--accent); }
+
+/* ========================= */
+/*        AVATARS            */
+/* ========================= */
+.avatar-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    margin-bottom: 15px;
+}
+
+.avatar-mini {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Mini avatar for lists */
+.mini-avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+/* ========================= */
+/*         LOBBY VIEW        */
+/* ========================= */
+.header {
+    position: absolute;
+    top: 10px; left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lobby-container {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.panel {
+    flex: 1;
+    min-height: 450px;
+}
+
+.join-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.leaderboard li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+}
+
+/* ========================= */
+/*        ROOM VIEW          */
+/* ========================= */
+.room-header {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+}
+
+.room-container {
+    width: 95%;
+    height: 80vh;
+    display: flex;
+    gap: 15px;
+}
+
+/* Game area */
+.game-area {
+    flex: 3;
+    padding: 20px;
+    overflow: auto;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+/* Social panel */
+.social-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.players-box {
+    height: 40%;
+    overflow-y: auto;
+}
+
+.chat-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding-right: 5px;
+}
+
+.chat-msg {
+    margin-bottom: 8px;
+}
+
+.chat-name {
+    color: var(--accent);
+}
+
+/* ========================= */
+/*      GAME: TIC TAC TOE    */
+/* ========================= */
+.ttt-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 8px;
+    margin: auto;
+}
+
+.ttt-cell {
+    width: 100px;
+    height: 100px;
+    background: #1a2338;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.8rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.ttt-cell:hover {
+    background: #2e3a5a;
+}
+
+/* ========================= */
+/*        GAME: SNAKE        */
+/* ========================= */
+#snake-canvas {
+    background: #111;
+    border: 3px solid var(--accent);
+    margin: auto;
+    display: block;
+}
+
+/* ========================= */
+/*       GAME: MEMORY        */
+/* ========================= */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 70px);
+    gap: 10px;
+    justify-content: center;
+}
+
+.mem-card {
+    width: 70px;
+    height: 70px;
+    background: #1c2748;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.mem-card.flipped {
+    background: var(--accent);
+}
+.mem-card.solved {
+    background: var(--success);
+}
+
+/* ========================= */
+/*        UNO CARDS          */
+/* ========================= */
+.uno-hand {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.uno-card {
+    width: 60px;
+    height: 90px;
+    border-radius: 8px;
+    display: flex;
+    font-size: 1.8rem;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* ========================= */
+/*        TAP TARGET         */
+/* ========================= */
+.tap-target {
+    width: 50px;
+    height: 50px;
+    background: var(--danger);
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+}
+
+/* ========================= */
+/*        SPEED BUTTON       */
+/* ========================= */
+.speed-btn {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    background: var(--success);
+    border: none;
+    color: #000;
+    font-size: 2rem;
+    cursor: pointer;
+    margin: auto;
+}
