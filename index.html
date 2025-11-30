@@ -6,7 +6,7 @@
     <title>Office Games Arena</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Firebase -->
+    <!-- Firebase v8 CDN -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
@@ -14,128 +14,96 @@
 
 <body>
 
-    <!-- ============================= -->
     <!-- LOGIN VIEW -->
-    <!-- ============================= -->
-    <section id="view-login" class="active">
-        <div class="card login-card glass">
-            <h1 class="title">Office Games <span class="accent">Arena</span></h1>
+    <section id="view-login" class="active-view">
+        <div class="card glass">
+            <h1>Office Games <span class="accent">Arena</span></h1>
 
-            <img id="login-avatar" class="avatar-large" src="" alt="avatar">
+            <img id="login-avatar" class="avatar-big" src="" alt="Avatar">
 
-            <input id="inp-username" class="input" type="text" maxlength="12" placeholder="Your Name...">
+            <input id="inp-username" type="text" placeholder="Your Name..." maxlength="16">
 
-            <button class="btn neon" onclick="app.randomizeAvatar()">Random Avatar</button>
-
-            <button class="btn primary" onclick="app.auth()">Enter Arena</button>
+            <button class="btn-secondary" onclick="app.randomizeAvatar()">Random Avatar</button>
+            <button class="btn-primary" onclick="app.auth()">Enter Arena</button>
         </div>
     </section>
 
-
-
-    <!-- ============================= -->
-    <!-- LOBBY VIEW -->
-    <!-- ============================= -->
+    <!-- LOBBY -->
     <section id="view-lobby" class="hidden">
-        <header class="header glass">
-            <div class="user-info">
-                <img id="lobby-avatar" class="avatar-mini" src="">
-                <span id="lobby-name"></span>
+        <header class="top-header">
+            <div class="user-box">
+                <img id="lobby-avatar" class="mini-avatar">
+                <span id="lobby-name">Player</span>
             </div>
         </header>
 
         <div class="lobby-container">
 
-            <!-- LEFT PANEL -->
             <div class="panel glass">
-                <h2>Game Rooms</h2>
-
-                <button class="btn primary" onclick="app.createRoom()">Create Room</button>
+                <h2>Create / Join Room</h2>
+                <button class="btn-primary" onclick="app.createRoom()">Create Room</button>
 
                 <div class="join-box">
-                    <input id="inp-room-code" type="text" maxlength="5" placeholder="Room Code">
-                    <button class="btn secondary" onclick="app.joinRoom()">Join</button>
+                    <input id="inp-room-code" type="text" placeholder="Room Code">
+                    <button class="btn-secondary" onclick="app.joinRoom()">Join</button>
                 </div>
             </div>
 
-
-            <!-- RIGHT PANEL -->
             <div class="panel glass">
                 <h2>Leaderboard</h2>
-
-                <ul id="leaderboard-list" class="leaderboard"></ul>
+                <ul id="leaderboard-list"></ul>
             </div>
+
         </div>
     </section>
 
-
-
-
-    <!-- ============================= -->
-    <!-- ROOM VIEW -->
-    <!-- ============================= -->
+    <!-- ROOM -->
     <section id="view-room" class="hidden">
+        <header class="room-header">
+            <button class="btn-secondary" onclick="app.leaveRoom()">← Leave</button>
+            <h2 id="room-display-code">CODE:</h2>
+        </header>
 
-        <!-- HEADER -->
-        <div class="room-header glass">
-            <button class="btn back" onclick="app.leaveRoom()">← Lobby</button>
-            <h3 id="room-display-code">CODE:</h3>
-        </div>
+        <div class="room-layout">
 
-        <div class="room-container">
+            <div class="left-side glass">
+                <h3>Players</h3>
+                <ul id="room-players"></ul>
 
-            <!-- GAME AREA -->
-            <div class="game-area glass">
-                
-                <!-- Game Selector (Host Only) -->
+                <div class="chat-box">
+                    <div id="chat-box" class="chat-messages"></div>
+                    <div class="chat-input">
+                        <input id="inp-chat" type="text" placeholder="Type...">
+                        <button onclick="app.sendChat()">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-side glass">
+
+                <!-- Host game selector -->
                 <div id="game-selector">
                     <h3>Select Game</h3>
-
                     <div class="game-grid">
-                        <button onclick="game.start('tictactoe')" class="btn game-btn">Tic Tac Toe</button>
-                        <button onclick="game.start('snake')" class="btn game-btn">Snake Battle</button>
-                        <button onclick="game.start('rps')" class="btn game-btn">Rock Paper Scissors</button>
-                        <button onclick="game.start('speed')" class="btn game-btn">Speed Click</button>
-                        <button onclick="game.start('word')" class="btn game-btn">Word Guess</button>
-                        <button onclick="game.start('memory')" class="btn game-btn">Memory Match</button>
-                        <button onclick="game.start('draw')" class="btn game-btn">Drawing Game</button>
-                        <button onclick="game.start('math')" class="btn game-btn">Math Duel</button>
-                        <button onclick="game.start('uno')" class="btn game-btn">UNO Mini</button>
-                        <button onclick="game.start('tap')" class="btn game-btn">Tap Target</button>
+                        <button onclick="game.start('tictactoe')">Tic Tac Toe</button>
+                        <button onclick="game.start('snake')">Snake</button>
+                        <button onclick="game.start('rps')">Rock Paper Scissors</button>
+                        <button onclick="game.start('speed')">Speed Click</button>
+                        <button onclick="game.start('word')">Word Guess</button>
+                        <button onclick="game.start('memory')">Memory</button>
+                        <button onclick="game.start('draw')">Draw & Guess</button>
+                        <button onclick="game.start('math')">Math Duel</button>
+                        <button onclick="game.start('uno')">Mini UNO</button>
+                        <button onclick="game.start('tap')">Tap Target</button>
                     </div>
                 </div>
 
-                <!-- Active Game Stage -->
+                <!-- Game view -->
                 <div id="game-stage" class="hidden">
                     <h2 id="game-title">Game</h2>
                     <div id="game-canvas"></div>
 
-                    <!-- Host-only Controls -->
-                    <div id="host-controls" class="hidden">
-                        <button class="btn danger" onclick="game.reset()">Reset Game</button>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!-- SOCIAL PANEL -->
-            <div class="social-area glass">
-
-                <!-- Players List -->
-                <div class="players-box">
-                    <h3>Players</h3>
-                    <ul id="room-players"></ul>
-                </div>
-
-                <!-- CHAT -->
-                <div class="chat-box">
-                    <div id="chat-box" class="chat-messages"></div>
-
-                    <div class="chat-input">
-                        <input id="inp-chat" type="text" placeholder="Message...">
-                        <button class="btn neon" onclick="app.sendChat()">Send</button>
-                    </div>
+                    <button id="host-controls" class="btn-danger hidden" onclick="game.reset()">Reset Game</button>
                 </div>
 
             </div>
@@ -143,6 +111,7 @@
 
     </section>
 
+    <!-- App Logic -->
     <script src="script.js"></script>
 </body>
 </html>
