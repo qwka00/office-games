@@ -3,19 +3,6 @@
    =========================================================== */
 
 /* ========== 1) FIREBASE CONFIGURATION ========== */
-const firebaseConfig = {
-  apiKey: "AIzaSyB9Xg6RDjn80Qj6H_8YePZTAut2epuCQ28",
-  authDomain: "office-games-arena.firebaseapp.com",
-  databaseURL: "https://office-games-arena-default-rtdb.firebaseio.com",
-  projectId: "office-games-arena",
-  storageBucket: "office-games-arena.appspot.com",
-  messagingSenderId: "659976973202",
-  appId: "1:659976973202:web:502dde78dfb48f297def4b"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const auth = firebase.auth();
 
 
 
@@ -1099,3 +1086,4 @@ game.r_tap = (st, el) => {
 
     el.appendChild(target);
 };
+
